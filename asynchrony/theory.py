@@ -1,0 +1,2 @@
+def odds(start, stop):
+    

@@ -1,0 +1,1 @@
+- Setup a blog using Django with postgresql backend.

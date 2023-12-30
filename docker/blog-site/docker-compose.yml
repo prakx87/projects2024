@@ -1,0 +1,23 @@
+services:
+  web:
+    image: prakx/djangoblog:v1
+    build: web/
+    ports: 
+      - "80:8000"
+    environment:
+      DB_USER: django_user
+      DB_PASS: django_pass
+      DB_NAME: django_db
+      DB_HOST: postgres
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:14.10-alpine3.19
+    restart: always
+    environment:
+      POSTGRES_USER: django_user
+      POSTGRES_PASSWORD: django_pass
+      POSTGRES_DB: django_db
+
+networks:
+  blog_network:

@@ -29,7 +29,7 @@ class ContactBook():
         parser.add_argument(
             "operation",
             choices=["create", "update", "delete", "search", "backup"],
-            help="Specify what kind of operation you wish to do: CRUD/SEARCH"
+            help="Specify what kind of operation you wish to do: CRUD/SEARCH/BACKUP"
         )
 
         parser.add_argument("-n", "--name", type=str, required=False)

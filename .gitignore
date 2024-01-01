@@ -89,3 +89,5 @@ local_settings.py
 .venv
 *.venv
 db.sqlite3
+
+commandline/backup_book_*.db

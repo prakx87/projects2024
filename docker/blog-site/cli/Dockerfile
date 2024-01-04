@@ -1,12 +1,27 @@
-FROM alpine:3.19.0
+FROM prakx/djangoblog:v1
 
-RUN apk update
-RUN apk add postgresql14-client
-RUN apk add bash
+RUN apt-get update
+RUN apt-get install wget gnupg -y
 
-RUN echo "export PGPASSWORD=\${POSTGRES_PASSWORD}; psql -h postgres -U \${POSTGRES_USER} -d \${POSTGRES_DB}" > /usr/local/bin/psqlcli
+RUN bash -c 'echo "deb https://apt.postgresql.org/pub/repos/apt focal-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+
+RUN apt-get update
+RUN apt-get install postgresql-client-14 -y
+
+RUN echo "export PGPASSWORD=\${DB_PASS}; psql -h \${DB_HOST} -U \${DB_USER} -d \${DB_NAME}" > /usr/local/bin/psqlcli
 RUN chmod +x /usr/local/bin/psqlcli
 
+RUN useradd -ms /bin/bash localuser
+
+RUN chown -R localuser:localuser /blog_site
+RUN mkdir /dumps/
+RUN chown -R localuser:localuser /dumps
+
 WORKDIR /dumps/
+
+USER localuser
+
+ENTRYPOINT [""]
 
 CMD ["/bin/bash", "-c", "while true; do sleep 60; done"]

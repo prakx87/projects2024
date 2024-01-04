@@ -30,9 +30,10 @@ services:
     volumes:
       - psqlcli:/dumps/
     environment:
-      POSTGRES_USER: django_user
-      POSTGRES_PASSWORD: django_pass
-      POSTGRES_DB: django_db
+      DB_USER: django_user
+      DB_PASS: django_pass
+      DB_NAME: django_db
+      DB_HOST: postgres
 
 volumes:
   psqldb:
